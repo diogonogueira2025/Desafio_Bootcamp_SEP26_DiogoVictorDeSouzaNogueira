@@ -1,24 +1,40 @@
-from carregar_corpus import carregar_metadados, carregar_textos
 from pathlib import Path
+
 import pandas as pd
 
-def dividir_por_secao(documentos_df: pd.DataFrame) -> pd.DataFrame:
+from carregar_corpus import carregar_metadados, carregar_textos
+
+
+def extrair_secao(parte: str) -> tuple[str, str]:
+    """Separa o nome da seção do seu texto completo."""
+    nome_secao, texto_secao = parte.strip().split("\n", 1)
+    return nome_secao, texto_secao.strip()
+
+
+def criar_chunks_documento(documento: pd.Series) -> list[dict[str, str]]:
+    """Cria os chunks de um documento, ignorando seu cabeçalho."""
     chunks = []
-    for _, linha in documentos_df.iterrows():
-        partes = linha['texto'].split("##")
+    partes = documento["texto"].split("##")
 
-        for i in range(1, len(partes)):
-            divisao = partes[i].strip().split("\n", 1)
-            secao = divisao[0]
-            texto_secao = divisao[1].strip()
+    for parte in partes[1:]:
+        nome_secao, texto_secao = extrair_secao(parte)
+        chunks.append({
+            "doc_id": documento["doc_id"],
+            "titulo": documento["titulo"],
+            "secao": nome_secao,
+            "status": documento["status"],
+            "texto": texto_secao,
+        })
 
-            chunks.append({
-                "doc_id": linha["doc_id"],
-                "titulo": linha["titulo"],
-                "secao": secao,
-                "status": linha["status"],
-                "texto": texto_secao,
-            })
+    return chunks
+
+
+def dividir_por_secao(documentos_df: pd.DataFrame) -> pd.DataFrame:
+    """Reúne os chunks de todos os documentos em um DataFrame."""
+    chunks = []
+    for _, documento in documentos_df.iterrows():
+        chunks.extend(criar_chunks_documento(documento))
+
     return pd.DataFrame(chunks, columns=["doc_id", "titulo", "secao", "status", "texto"])
 
 
