@@ -43,4 +43,13 @@ if __name__ == "__main__":
     pasta_corpus = pasta_insumos / "corpus"
     df = carregar_textos(carregar_metadados(pasta_insumos), pasta_corpus)
 
-    print(dividir_por_secao(documentos_df=df))
+    df_chunks = dividir_por_secao(documentos_df=df)
+    print(df_chunks)
+
+    print("\nTotal de chunks:", len(df_chunks))
+    print("\nChunks por documento:")
+    print(df_chunks.groupby("doc_id").size().rename("numero_chunks").to_string())
+
+    print("\nExemplo completo de chunk:")
+    for campo, valor in df_chunks.iloc[0].items():
+        print(f"{campo}: {valor}")
