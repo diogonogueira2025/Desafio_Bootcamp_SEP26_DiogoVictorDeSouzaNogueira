@@ -22,3 +22,32 @@ FAQ-001   vigente              145
 
 ```
 
+## Parte 1
+Número total de chunks, número de chunks por documento e um exemplo completo de chunk (todos os
+campos):
+```
+Total de chunks: 46
+
+Chunks por documento:
+doc_id
+FAQ-001    6
+POL-001    3
+POL-002    4
+POL-003    4
+POL-004    3
+POL-005    3
+POL-006    4
+POL-007    4
+POL-008    4
+POL-009    4
+POL-010    3
+POL-011    4
+
+Exemplo completo de chunk:
+doc_id: POL-001
+titulo: Política de Onboarding
+secao: Objetivo
+status: vigente
+texto: Esta política define as etapas dos primeiros 30 dias de um novo colaborador na Horizonte Tech.
+
+```
