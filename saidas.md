@@ -51,3 +51,13 @@ status: vigente
 texto: Esta política define as etapas dos primeiros 30 dias de um novo colaborador na Horizonte Tech.
 
 ```
+
+## Parte 2
+
+Converto os textos para minúsculas para uniformizar palavras com diferentes capitalizações e mantenho acentos e stopwords para avaliar uma configuração inicial simples antes de testar outras opções.
+
+```text
+Forma da matriz (linhas, colunas): (46, 350)
+Número de chunks: 46
+Tamanho do vocabulário: 350
+```
