@@ -3,6 +3,7 @@
 Este arquivo contém as evidências das Partes 0 a 5.
 
 ## Parte 0
+
 Tabela com doc_id, status e número de palavras de cada documento:
 ```
            status  numero_palavras
@@ -23,6 +24,7 @@ FAQ-001   vigente              145
 ```
 
 ## Parte 1
+
 Número total de chunks, número de chunks por documento e um exemplo completo de chunk (todos os
 campos):
 ```
@@ -56,8 +58,32 @@ texto: Esta política define as etapas dos primeiros 30 dias de um novo colabora
 
 Converto os textos para minúsculas para uniformizar palavras com diferentes capitalizações e mantenho acentos e stopwords para avaliar uma configuração inicial simples antes de testar outras opções.
 
-```text
+```
 Forma da matriz (linhas, colunas): (46, 350)
 Número de chunks: 46
 Tamanho do vocabulário: 350
+```
+
+## Parte 3
+
+Lista dos 3 chunks retornados com doc_id, seção e score (duas casas decimais):
+```
+P01: Com quantos dias de antecedência devo solicitar minhas férias?
+ doc_id            secao  status score
+POL-002   Como solicitar vigente  0.41
+POL-002    Venda de dias vigente  0.41
+POL-002 Direito a férias vigente  0.25
+
+P02: Quantos dias por semana posso trabalhar de forma remota?
+ doc_id                                 secao  status score
+POL-005              Regra de trabalho remoto vigente  0.53
+FAQ-001 Posso trabalhar remoto todos os dias? vigente  0.20
+POL-008                   Entrevista de saída vigente  0.17
+Verificação: POL-004 não aparece nos resultados da P02.
+
+P10: Qual é a política de estacionamento da empresa?
+ doc_id                        secao  status score
+POL-003 Auxílio para trabalho remoto vigente  0.27
+POL-008                        Aviso vigente  0.21
+POL-001                     Objetivo vigente  0.18
 ```

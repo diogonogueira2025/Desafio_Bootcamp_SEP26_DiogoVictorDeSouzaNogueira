@@ -19,7 +19,10 @@ def criar_indice(df_chunks: pd.DataFrame):
 
 
 if __name__ == "__main__":
-    pasta_insumos = Path("../insumos_Desafio_Bootcamp_SEP26")
+    pasta_insumos = (
+        Path(__file__).resolve().parent.parent
+        / "insumos_Desafio_Bootcamp_SEP26"
+    )
     metadados_df = carregar_metadados(pasta_insumos)
     documentos_df = carregar_textos(metadados_df, pasta_insumos / "corpus")
     df_chunks = dividir_por_secao(documentos_df)
@@ -27,7 +30,6 @@ if __name__ == "__main__":
     vetorizador, matriz_chunks = criar_indice(df_chunks)
     numero_chunks, tamanho_vocabulario = matriz_chunks.shape
 
-    print("## Parte 2 — Indexação com TF-IDF")
     print(f"Forma da matriz (linhas, colunas): {matriz_chunks.shape}")
     print(f"Número de chunks: {numero_chunks}")
     print(f"Tamanho do vocabulário: {tamanho_vocabulario}")

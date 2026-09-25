@@ -39,7 +39,10 @@ def dividir_por_secao(documentos_df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    pasta_insumos = Path("../insumos_Desafio_Bootcamp_SEP26")
+    pasta_insumos = (
+        Path(__file__).resolve().parent.parent
+        / "insumos_Desafio_Bootcamp_SEP26"
+    )
     pasta_corpus = pasta_insumos / "corpus"
     df = carregar_textos(carregar_metadados(pasta_insumos), pasta_corpus)
 
