@@ -2,6 +2,11 @@ from pathlib import Path
 
 import pandas as pd
 
+PASTA_INSUMOS = (
+    Path(__file__).resolve().parent.parent
+    / "insumos_Desafio_Bootcamp_SEP26"
+)
+
 
 def carregar_metadados(pasta_insumos: Path) -> pd.DataFrame:
     """Lê os metadados dos documentos em um DataFrame."""
@@ -37,13 +42,9 @@ def gerar_evidencia(metadados_df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    pasta_insumos = (
-        Path(__file__).resolve().parent.parent
-        / "insumos_Desafio_Bootcamp_SEP26"
-    )
-    pasta_corpus = pasta_insumos / "corpus"
+    pasta_corpus = PASTA_INSUMOS / "corpus"
 
-    df = carregar_metadados(pasta_insumos)
+    df = carregar_metadados(PASTA_INSUMOS)
     df = carregar_textos(df, pasta_corpus)
 
     evidencia = gerar_evidencia(df)

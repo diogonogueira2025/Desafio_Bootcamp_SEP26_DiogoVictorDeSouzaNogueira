@@ -1,18 +1,11 @@
 from functools import lru_cache
-from pathlib import Path
 
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
-from carregar_corpus import carregar_metadados, carregar_textos
+from carregar_corpus import PASTA_INSUMOS, carregar_metadados, carregar_textos
 from chunking import dividir_por_secao
 from indexacao import criar_indice
-
-PASTA_INSUMOS = (
-    Path(__file__).resolve().parent.parent
-    / "insumos_Desafio_Bootcamp_SEP26"
-)
-
 
 @lru_cache(maxsize=1)
 def preparar_busca():

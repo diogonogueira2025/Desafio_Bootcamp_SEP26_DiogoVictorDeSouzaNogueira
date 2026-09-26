@@ -1,6 +1,7 @@
 import pandas as pd
 
-from recuperacao import PASTA_INSUMOS, buscar
+from carregar_corpus import PASTA_INSUMOS
+from recuperacao import buscar
 
 THRESHOLD = 0.30
 MENSAGEM_NAO_ENCONTRADO = (

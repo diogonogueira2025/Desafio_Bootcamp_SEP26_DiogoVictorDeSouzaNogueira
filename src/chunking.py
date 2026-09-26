@@ -1,8 +1,6 @@
-from pathlib import Path
-
 import pandas as pd
 
-from carregar_corpus import carregar_metadados, carregar_textos
+from carregar_corpus import PASTA_INSUMOS, carregar_metadados, carregar_textos
 
 
 def extrair_secao(parte: str) -> tuple[str, str]:
@@ -39,12 +37,8 @@ def dividir_por_secao(documentos_df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    pasta_insumos = (
-        Path(__file__).resolve().parent.parent
-        / "insumos_Desafio_Bootcamp_SEP26"
-    )
-    pasta_corpus = pasta_insumos / "corpus"
-    df = carregar_textos(carregar_metadados(pasta_insumos), pasta_corpus)
+    pasta_corpus = PASTA_INSUMOS / "corpus"
+    df = carregar_textos(carregar_metadados(PASTA_INSUMOS), pasta_corpus)
 
     df_chunks = dividir_por_secao(documentos_df=df)
     print(df_chunks)

@@ -1,9 +1,7 @@
-from pathlib import Path
-
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from carregar_corpus import carregar_metadados, carregar_textos
+from carregar_corpus import PASTA_INSUMOS, carregar_metadados, carregar_textos
 from chunking import dividir_por_secao
 
 def criar_indice(df_chunks: pd.DataFrame):
@@ -19,12 +17,8 @@ def criar_indice(df_chunks: pd.DataFrame):
 
 
 if __name__ == "__main__":
-    pasta_insumos = (
-        Path(__file__).resolve().parent.parent
-        / "insumos_Desafio_Bootcamp_SEP26"
-    )
-    metadados_df = carregar_metadados(pasta_insumos)
-    documentos_df = carregar_textos(metadados_df, pasta_insumos / "corpus")
+    metadados_df = carregar_metadados(PASTA_INSUMOS)
+    documentos_df = carregar_textos(metadados_df, PASTA_INSUMOS / "corpus")
     df_chunks = dividir_por_secao(documentos_df)
 
     vetorizador, matriz_chunks = criar_indice(df_chunks)
