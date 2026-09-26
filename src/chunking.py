@@ -1,8 +1,6 @@
-from pathlib import Path
-
 import pandas as pd
 
-from carregar_corpus import carregar_metadados, carregar_textos
+from carregar_corpus import carregar_documentos
 
 
 def extrair_secao(parte: str) -> tuple[str, str]:
@@ -39,20 +37,15 @@ def dividir_por_secao(documentos_df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    pasta_insumos = (
-        Path(__file__).resolve().parent.parent
-        / "insumos_Desafio_Bootcamp_SEP26"
-    )
-    pasta_corpus = pasta_insumos / "corpus"
-    df = carregar_textos(carregar_metadados(pasta_insumos), pasta_corpus)
+    documentos_df = carregar_documentos()
 
-    df_chunks = dividir_por_secao(documentos_df=df)
-    print(df_chunks)
+    chunks_df = dividir_por_secao(documentos_df)
+    print(chunks_df)
 
-    print("\nTotal de chunks:", len(df_chunks))
+    print("\nTotal de chunks:", len(chunks_df))
     print("\nChunks por documento:")
-    print(df_chunks.groupby("doc_id").size().rename("numero_chunks").to_string())
+    print(chunks_df.groupby("doc_id").size().rename("numero_chunks").to_string())
 
     print("\nExemplo completo de chunk:")
-    for campo, valor in df_chunks.iloc[0].items():
+    for campo, valor in chunks_df.iloc[0].items():
         print(f"{campo}: {valor}")
