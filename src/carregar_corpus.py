@@ -33,21 +33,23 @@ def carregar_textos(metadados_df: pd.DataFrame, pasta_corpus: Path) -> pd.DataFr
     return documentos_df
 
 
-def gerar_evidencia(metadados_df: pd.DataFrame) -> pd.DataFrame:
-    """Reúne status e número de palavras, com doc_id como índice."""
-    evidencia = metadados_df.copy()
-    evidencia["numero_palavras"] = evidencia["texto"].str.split().str.len()
+def carregar_documentos() -> pd.DataFrame:
+    """Carrega os metadados e os textos completos do corpus."""
+    metadados_df = carregar_metadados(PASTA_INSUMOS)
+    return carregar_textos(metadados_df, PASTA_INSUMOS / "corpus")
 
-    return evidencia[["doc_id", "status", "numero_palavras"]].set_index("doc_id")
+
+def gerar_evidencia(documentos_df: pd.DataFrame) -> pd.DataFrame:
+    """Reúne status e número de palavras, com doc_id como índice."""
+    evidencia_df = documentos_df.copy()
+    evidencia_df["numero_palavras"] = evidencia_df["texto"].str.split().str.len()
+
+    return evidencia_df[["doc_id", "status", "numero_palavras"]].set_index("doc_id")
 
 
 if __name__ == "__main__":
-    pasta_corpus = PASTA_INSUMOS / "corpus"
+    documentos_df = carregar_documentos()
+    evidencia_df = gerar_evidencia(documentos_df)
 
-    df = carregar_metadados(PASTA_INSUMOS)
-    df = carregar_textos(df, pasta_corpus)
-
-    evidencia = gerar_evidencia(df)
-
-    print(df["status"].value_counts())
-    print(evidencia)
+    print(documentos_df["status"].value_counts())
+    print(evidencia_df)

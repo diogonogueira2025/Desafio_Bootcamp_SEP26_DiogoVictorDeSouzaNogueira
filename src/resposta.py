@@ -25,13 +25,13 @@ def formatar_saida(
 
 def responder(pergunta: str) -> str:
     """Retorna o texto do melhor chunk ou a mensagem de não encontrado."""
-    resultados = buscar(pergunta, k=1)
-    score = float(resultados.iloc[0]["score"]) if not resultados.empty else 0.0
+    resultados_df = buscar(pergunta, k=1)
+    score = float(resultados_df.iloc[0]["score"]) if not resultados_df.empty else 0.0
 
-    if resultados.empty or score < THRESHOLD:
+    if resultados_df.empty or score < THRESHOLD:
         return formatar_saida(pergunta, MENSAGEM_NAO_ENCONTRADO, "nenhuma", score, "nao_encontrado")
 
-    melhor_chunk = resultados.iloc[0]
+    melhor_chunk = resultados_df.iloc[0]
     fonte = (
         f"{melhor_chunk['doc_id']} | {melhor_chunk['titulo']} | "
         f"Seção: {melhor_chunk['secao']}"
@@ -41,10 +41,10 @@ def responder(pergunta: str) -> str:
 
 if __name__ == "__main__":
     perguntas_df = pd.read_csv(PASTA_INSUMOS / "perguntas_gabarito.csv")
-    perguntas_teste = perguntas_df.loc[
+    perguntas_teste_df = perguntas_df.loc[
         perguntas_df["pergunta_id"].isin(["P02", "P10"])
     ]
 
-    for _, pergunta in perguntas_teste.iterrows():
+    for _, pergunta in perguntas_teste_df.iterrows():
         print(responder(pergunta["pergunta"]))
         print()
