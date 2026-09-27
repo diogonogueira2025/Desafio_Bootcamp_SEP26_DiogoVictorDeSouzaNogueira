@@ -51,6 +51,7 @@ secao: Objetivo
 status: vigente
 texto: Esta política define as etapas dos primeiros 30 dias de um novo colaborador na Horizonte Tech.
 ```
+Os chunks têm tamanhos diferentes, pois cada um preserva o conteúdo completo de uma seção.
 
 ## Parte 2
 
