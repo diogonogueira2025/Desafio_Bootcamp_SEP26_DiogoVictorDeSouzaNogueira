@@ -42,6 +42,7 @@ src/
 pyproject.toml
 uv.lock
 README.md
+reflexao.md
 saidas.md
 ```
 
