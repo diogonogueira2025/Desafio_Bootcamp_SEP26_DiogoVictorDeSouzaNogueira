@@ -95,7 +95,7 @@ Cada script prepara os dados de que precisa; não é necessário executar os ant
 | `pyproject.toml` | Declara os requisitos do projeto. |
 | `uv.lock` | Registra as versões resolvidas das dependências. |
 
-A reflexão será apresentada em `reflexao.md`, ainda pendente de elaboração.
+A reflexão sobre as decisões técnicas e os riscos de uso está em `reflexao.md`.
 
 ## Resultados e limitações
 
@@ -111,9 +111,3 @@ Resultados registrados em `saidas.md` para o gabarito fornecido:
 Hit@1 e Hit@3 verificam a presença do documento esperado nos resultados de recuperação, independentemente do threshold. Na tabela de avaliação, `acerto` exige documento correto no primeiro resultado e status `encontrado`; para P10, exige status `nao_encontrado`.
 
 Esses resultados se referem às dez perguntas do gabarito e não garantem o mesmo desempenho em novas perguntas. A recuperação depende das palavras compartilhadas entre pergunta e texto. A P04, por exemplo, teve score de `0.31`, próximo do threshold; a análise desse caso e uma proposta de melhoria estão em `saidas.md`.
-
-## Entrega
-
-O ZIP de entrega deve incluir `src/`, `saidas.md`, `reflexao.md` quando concluído, este README, `pyproject.toml` e `uv.lock`. Não inclua o corpus, os CSVs originais, `.venv`, `.git`, `.idea` ou `__pycache__`.
-
-Nome do arquivo: `Desafio_Bootcamp_SEP26_DiogoVictorDeSouzaNogueira.zip`.
